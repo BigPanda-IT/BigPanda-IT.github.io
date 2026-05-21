@@ -1,1 +1,123 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.ant-modal-mask {
+  backdrop-filter: blur(4px);
+}
+
+.ant-modal-confirm {
+  width: 520px;
+}
+
+.ant-modal-confirm .ant-modal-content {
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.ant-modal-confirm .ant-modal-confirm-body {
+  padding: 0;
+  display: block;
+}
+
+.ant-modal-confirm .ant-modal-confirm-body .ant-modal-confirm-title + .ant-modal-confirm-content {
+  margin-left: 0 !important;
+}
+
+.ant-modal-confirm .ant-modal-confirm-body .anticon {
+  display: none;
+}
+
+.custom-delete-modal {
+  text-align: center;
+  width: 100%;
+  padding: 12px 32px 0 32px;
+}
+
+.custom-delete-modal .delete-icon {
+  font-size: 68px;
+  margin-bottom: 8px;
+  opacity: 0.9;
+  display: block;
+  text-align: center;
+}
+
+.custom-delete-modal .delete-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.custom-delete-modal .delete-question {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.custom-delete-modal .delete-user-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #dc2626;
+  background: #fef2f2;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 85px;
+  margin: 20px auto 24px;
+  letter-spacing: -0.2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.custom-delete-modal .delete-warning {
+  font-size: 13px;
+  color: #f59e0b;
+  background: #fffbeb;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns {
+  margin-top: 0 !important;
+  padding: 8px 32px 32px 32px;
+  gap: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns .ant-btn {
+  min-width: 120px;
+  height: 44px;
+  margin: 0;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary {
+  background: #dc2626 !important;
+  border: none;
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary:hover {
+  background: #b91c1c !important;
+  transform: translateY(-1px);
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-default:hover {
+  border-color: #9ca3af;
+  color: #374151;
+}

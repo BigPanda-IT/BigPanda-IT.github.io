@@ -1,0 +1,106 @@
+<div class="form-page">
+    <div class="form-container">
+    <div class="form-header">
+        <h1>{{ isEditMode ? '✏️ Редактирование пользователя' : '➕ Добавление нового пользователя' }}</h1>
+    </div>
+
+    <div *ngIf="loading" class="loader-container">
+        <div class="custom-loader"></div>
+        <p class="loader-text">Загрузка...</p>
+    </div>
+
+    <form *ngIf="!loading" [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+        <div class="form-section">
+            <h3>Основная информация</h3>
+        
+        <div class="form-row">
+            <div class="form-field">
+                <label>👤 Имя *</label>
+                <input nz-input formControlName="name" placeholder="Введите имя">
+                <div class="error-message" *ngIf="isFieldInvalid('name')">{{ getFieldError('name') }}</div>
+            </div>
+
+            <div class="form-field">
+                <label>🔖 Никнейм *</label>
+                <input nz-input formControlName="username" placeholder="Введите username">
+                <div class="error-message" *ngIf="isFieldInvalid('username')">{{ getFieldError('username') }}</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label>📧 Email *</label>
+                <input nz-input formControlName="email" placeholder="user@example.com">
+                <div class="error-message" *ngIf="isFieldInvalid('email')">{{ getFieldError('email') }}</div>
+            </div>
+
+            <div class="form-field">
+                <label>📞 Телефон</label>
+                <input nz-input formControlName="phone" placeholder="+7 (XXX) XXX-XX-XX">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label>🌐 Сайт</label>
+                <input nz-input formControlName="website" placeholder="https://example.com">
+            </div>
+        </div>
+      </div>
+
+        <div class="form-section">
+            <h3>📍 Адрес</h3>
+            <div class="form-field">
+                <label>Полный адрес</label>
+                <input nz-input formControlName="fullAddress" placeholder="ул. Примерная, д. 1, кв. 1, г. Москва, 123456">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>🗺️ Координаты</h3>
+            <div formGroupName="geo" class="form-row">
+                <div class="form-field">
+                <label>Широта</label>
+                <input nz-input formControlName="lat" placeholder="-37.3159">
+                </div>
+                <div class="form-field">
+                <label>Долгота</label>
+                <input nz-input formControlName="lng" placeholder="81.1496">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>🏢 Компания</h3>
+            <div formGroupName="company">
+                <div class="form-row">
+                <div class="form-field">
+                    <label>Название компании</label>
+                    <input nz-input formControlName="name" placeholder="Название компании">
+                </div>
+                </div>
+
+                <div class="form-row">
+                <div class="form-field">
+                    <label>📢 Слоган (catchPhrase)</label>
+                    <input nz-input formControlName="catchPhrase" placeholder="Слоган компании">
+                </div>
+
+                <div class="form-field">
+                    <label>🎯 Сфера деятельности (bs)</label>
+                    <input nz-input formControlName="bs" placeholder="Направление бизнеса">
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="onCancel()">Отмена</button>
+            <button type="submit" class="submit-btn" [disabled]="submitting">
+                <span *ngIf="!submitting">{{ isEditMode ? 'Сохранить' : 'Создать' }}</span>
+                <span *ngIf="submitting">Сохранение...</span>
+            </button>
+        </div>
+    </form>
+  </div>
+</div>

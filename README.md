@@ -1,59 +1,145 @@
-# YADRO2026
+# UserHub — Управление пользователями
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+Современное Angular-приложение для управления пользователями с удобным интерфейсом, фильтрацией, пагинацией и маршрутизацией.
 
-## Development server
+## Основные возможности
 
-To start a local development server, run:
+- **Просмотр пользователей** — таблица со всеми пользователями, данные загружаются из API
+- **Фильтрация** — мгновенный поиск по имени или email
+- **Пагинация** — настройка количества записей на странице (1, 3, 5, 10, 30, 50, 100)
+- **Создание пользователя** — форма с валидацией (Reactive Forms)
+- **Редактирование** — изменение всех данных пользователя
+- **Удаление** — безопасное удаление с красивым модальным окном подтверждения
+- **Главная страница** — приветствие и карточки возможностей
+- **Адаптивный дизайн** — корректное отображение на всех устройствах
+
+## Маршрутизация
+
+| Маршрут | Описание |
+|---------|----------|
+| `/` | Главная страница |
+| `/users` | Список пользователей |
+| `/user/new` | Создание нового пользователя |
+| `/user/edit/:id` | Редактирование пользователя |
+| `/user/:id` | Детальная страница пользователя |
+
+## Структура данных (User)
+
+```json
+{
+  "id": 1,
+  "name": "Leanne Graham",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "phone": "1-770-736-8031 x56442",
+  "website": "hildegard.org",
+  "address": {
+    "street": "Kulas Light",
+    "suite": "Apt. 556",
+    "city": "Gwenborough",
+    "zipcode": "92998-3874",
+    "geo": { "lat": "-37.3159", "lng": "81.1496" }
+  },
+  "company": {
+    "name": "Romaguera-Crona",
+    "catchPhrase": "Multi-layered client-server neural-net",
+    "bs": "harness real-time e-markets"
+  }
+}
+
+```
+
+## Структура проекта
+
+```
+user-management-app/
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   │   ├── home/              # Главная страница
+│   │   │   ├── user-list/         # Список пользователей
+│   │   │   ├── user-form/         # Форма создания/редактирования
+│   │   │   └── user-detail/       # Детальная страница
+│   │   ├── models/                # Модели данных
+│   │   ├── services/              # Сервисы (API, кэширование)
+│   │   ├── app-routing.module.ts  # Маршрутизация
+│   │   ├── app.component.ts       # Корневой компонент
+|   |   |── app.component.html     # Корневой компонент
+│   │   └── app.module.ts          # Главный модуль
+│   ├── styles.css                 # Глобальные стили
+│   ├── index.html
+│   └── main.ts
+├── angular.json
+├── package.json
+└── README.md
+```
+
+## Технологии
+
+| Технология | Назначение |
+|------------|------------|
+| **Angular 21** | Основной фреймворк для построения SPA |
+| **NG-ZORRO** | UI-кит компонентов (таблицы, модальные окна, пагинация) |
+| **RxJS** | Работа с асинхронными HTTP-запросами |
+| **Reactive Forms** | Формы с валидацией (обязательные поля, email) |
+| **TypeScript** | Типизация кода, интерфейсы |
+| **SCSS** | Стилизация с препроцессором |
+| **JSONPlaceholder** | Тестовое REST API для пользователей |
+
+## Установка и запуск
+
+### Требования
+
+| Компонент | Версия |
+|-----------|--------|
+| **Node.js** | 18+ |
+| **npm** | 9+ |
+| **Angular CLI** | 21.2.11 |
+
+### Локальный запуск
 
 ```bash
+# 1. Клонировать репозиторий
+git clone <repository-url>
+cd YADRO2026
+
+# 2. Установить зависимости
+npm install
+
+# 3. Запустить приложение
 ng serve
+
+# 4. Открыть в браузере
+http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Сборка для продакшена
 
 ```bash
-ng generate component component-name
+ng build --prod
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## API
 
-```bash
-ng generate --help
-```
+Приложение использует тестовое API [JSONPlaceholder](https://jsonplaceholder.typicode.com/users):
 
-## Building
+| Метод | Эндпоинт | Описание |
+|-------|----------|----------|
+| **GET** | `/users` | Получение списка пользователей |
+| **GET** | `/users/{id}` | Получение пользователя по ID |
+| **POST** | `/users` | Создание пользователя |
+| **PUT** | `/users/{id}` | Обновление пользователя |
+| **DELETE** | `/users/{id}` | Удаление пользователя |
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## Особенности реализации
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Особенность | Описание |
+|-------------|----------|
+| **Локальное кэширование** | Данные сохраняются в сервисе, **UI обновляется мгновенно** |
+| **Reactive Forms** | Полная валидация полей (**required**, **email**, **minLength**) |
+| **Адаптивная пагинация** | Выбор количества записей: **1, 3, 5, 10, 30, 50, 100** |
+| **Красивое модальное окно** | Подтверждение удаления с **анимацией** и **кастомными стилями** |
+| **Главная страница** | Карточки возможностей с **всплывающими подсказками** |
+| **Маршрутизация** | Навигация между всеми страницами приложения |

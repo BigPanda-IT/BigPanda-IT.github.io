@@ -1,0 +1,76 @@
+<div class="detail-page">
+  <div class="detail-container">
+    <div class="detail-header">
+      <button class="back-btn" (click)="goBack()">
+        ← Назад к списку
+      </button>
+      <button class="edit-btn" (click)="goToEdit()" *ngIf="user">
+        ✏️ Редактировать
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="loader-container">
+      <div class="custom-loader"></div>
+      <p class="loader-text">Загрузка пользователя...</p>
+    </div>
+
+    <div *ngIf="!loading && user" class="detail-content">
+      <div class="detail-avatar" [style.backgroundColor]="getAvatarColor(user.id)">
+        {{ user.name.charAt(0) }}
+      </div>
+      
+      <h1>{{ user.name }}</h1>
+      <p class="username">@{{ user.username }}</p>
+      
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-label">📧 Email</div>
+          <div class="info-value">{{ user.email }}</div>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-label">📞 Телефон</div>
+          <div class="info-value">{{ user.phone || '—' }}</div>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-label">🌐 Сайт</div>
+          <div class="info-value">{{ user.website || '—' }}</div>
+        </div>
+
+        <div class="info-card" *ngIf="user.address">
+          <div class="info-label">📍 Адрес</div>
+          <div class="info-value">
+            {{ user.address.street }} {{ user.address.suite }}<br>
+            {{ user.address.city }}, {{ user.address.zipcode }}
+          </div>
+        </div>
+
+        <div class="info-card" *ngIf="user.company">
+          <div class="info-label">🏢 Компания</div>
+          <div class="info-value">
+            <strong>{{ user.company.name }}</strong>
+            <div class="company-phrase" *ngIf="user.company.catchPhrase">
+              «{{ user.company.catchPhrase }}»
+            </div>
+            <div class="company-bs" *ngIf="user.company.bs">
+              {{ user.company.bs }}
+            </div>
+          </div>
+        </div>
+        
+        <div class="info-card" *ngIf="user.address?.geo">
+          <div class="info-label">🗺️ Координаты</div>
+          <div class="info-value">
+            {{ user.address?.geo?.lat }}, {{ user.address?.geo?.lng }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!loading && error" class="not-found">
+      <p>⚠️ Пользователь не найден</p>
+      <button class="back-btn" (click)="goBack()">Вернуться к списку</button>
+    </div>
+  </div>
+</div>

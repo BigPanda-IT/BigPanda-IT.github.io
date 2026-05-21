@@ -1,0 +1,109 @@
+<div class="page">
+    <div class="container">
+      <div class="header">
+        <h1 (click)="goHome()" style="cursor: pointer;">🗂️ YADRO 2026 | Список пользователей</h1>
+        <button nz-button nzType="primary" routerLink="/user/new" class="btn-primary">
+          + Добавить пользователя
+        </button>
+      </div>
+
+      <div class="search">
+        <input
+          nz-input
+          placeholder="🔍 Поиск по имени или email..."
+          [(ngModel)]="searchText"
+          (ngModelChange)="onSearchChange($event)"
+        />
+      </div>
+
+      <div class="table-container">
+        <div *ngIf="loading" class="loader-container">
+          <div class="custom-loader"></div>
+          <p class="loader-text">Загрузка пользователей...</p>
+        </div>
+
+        <nz-table
+          *ngIf="!loading"
+          [nzData]="filteredUsers"
+          [nzFrontPagination]="false"
+          [nzShowPagination]="false"
+          nzBordered
+        >
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Имя</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Телефон</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of filteredUsers; trackBy: trackById">
+              <td class="id">#{{ user.id }}</td>
+              <td>
+                <div class="user">
+                  <div class="avatar" [style.backgroundColor]="getAvatarColor(user.id)">
+                    {{ user.name.charAt(0) }}
+                  </div>
+                  <span class="name">{{user.name }}</span>
+                </div>
+              </td>
+              <td class="email">{{ user.email }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.phone || '—' }}</td>
+              <td>
+                <div class="actions">
+                  <button (click)="goToUserDetail(user.id)" title="Просмотр">👁️</button>
+                  <button [routerLink]="['/user/edit', user.id]" title="Редактировать">✏️</button>
+                  <button (click)="deleteUser(user)" title="Удалить">🗑️</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+
+      <div class="pagination" *ngIf="!loading && total > 0">
+        <div class="page-size-selector">
+          <span>Показывать по:</span>
+          <div class="page-size-buttons">
+            <button 
+              *ngFor="let size of pageSizeOptions" 
+              class="size-option-btn" 
+              [class.active]="pageSize === size"
+              (click)="onPageSizeChange(size)">
+              {{ size }}
+            </button>
+          </div>
+          <span>записей</span>
+        </div>
+        <nz-pagination
+          [nzPageIndex]="pageIndex"
+          [nzPageSize]="pageSize"
+          [nzTotal]="total"
+          (nzPageIndexChange)="onPageIndexChange($event)"
+        >
+        </nz-pagination>
+      </div>
+    </div>
+  </div>
+
+<nz-modal
+  [(nzVisible)]="isModalVisible"
+  nzTitle="Информация о пользователе"
+  (nzOnCancel)="closeModal()"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <div *ngIf="selectedUser">
+      <p><strong>ID:</strong> {{ selectedUser.id }}</p>
+      <p><strong>Имя:</strong> {{ selectedUser.name }}</p>
+      <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+      <p><strong>Username:</strong> {{ selectedUser.username }}</p>
+      <p><strong>Телефон:</strong> {{ selectedUser.phone || '—' }}</p>
+      <p><strong>Сайт:</strong> {{ selectedUser.website || '—' }}</p>
+    </div>
+  </ng-container>
+</nz-modal>
